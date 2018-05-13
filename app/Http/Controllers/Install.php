@@ -7,7 +7,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Redirect;
-use Providers\Add_User;
+use app\Add_User;
 
 class Install extends Controller
 {
