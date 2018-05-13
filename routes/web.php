@@ -18,4 +18,5 @@ Route::get('xinchao/{name}', function ($name) {
     echo 'xin chào '.$name;
 });
 Route::get('hello','Index_controller@index');
-Route::get('install','Install@Creat_User');
+Route::get('install','Install@Index');
+Route::post('install/add-user','Install@Add_User');
