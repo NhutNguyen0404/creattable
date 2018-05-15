@@ -7,7 +7,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Redirect;
-use app\Add_User;
+use App\Add_User;
+use \Crypt;
 
 class Install extends Controller
 {
@@ -63,13 +64,14 @@ class Install extends Controller
         }
         if($check_err==false)
         {
-            Redirect::to('install');
+            redirect()->router('install');
         }
         else
         {
             unset($this->data_frm['_token']);
             unset($this->data_frm['password_re']);
             $data = check_value_null($this->data_frm,$this->data_df);
+            $data['password'] = Crypt::encrypt($data['password']);
             schema::create('user_table',function($table){
                 $table->Increments('id');
                 $table->text('username',255);
@@ -81,6 +83,7 @@ class Install extends Controller
                 $table->integer('rank');
             });
             Add_User::insert($data);
+            echo ('tạo thành công');
         }
     }
 
